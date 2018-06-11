@@ -17,20 +17,34 @@ function Set-NICPowerSaving {
     begin {
         #get all network adapters
         $colNic = Get-NetAdapter
+        #error variable
+        $err = ""
     }
     
     process {
         #foreach Net Adapter, either enable or disable powermanagement based on setEnabled Parameter
         foreach ($nic in $colNic) {
             if ($setEnabled) {
-                $nic | Enable-NetAdapterPowerManagement
+                try {
+                    $nic | Enable-NetAdapterPowerManagement -ErrorAction Stop
+                }
+                catch {
+                    Write-Host -ForegroundColor Red "Error Trying to Enable Power Management on:" $nic.Name
+                }
             }
             else {
-                $nic | Disable-NetAdapterPowerManagement
+                try {
+                $nic | Disable-NetAdapterPowerManagement -ErrorAction Stop
+                }
+                catch {
+                    Write-Host -ForegroundColor Red "Error Trying to Disable Power Management on:" $nic.Name
+                }
             }
         }
     }
 }
+
+
 
 
 
