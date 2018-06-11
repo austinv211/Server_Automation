@@ -2,7 +2,10 @@
 script to automate server build process
 
 ## Functions
-Set-NICPowerSaving()
+__Set-NICPowerSaving()__
 
 ## Function Descriptions:
-Set-NICPowerSaving() - applies correct NIC power savings option, takes String input to determine setting level
+__Set-NICPowerSaving()__ :
+    * Input: String (power setting)
+    * Output: Boolean
+    * Description: Sets Power Saving Setting for NIC
