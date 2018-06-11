@@ -17,8 +17,8 @@ function Set-NICPowerSaving {
     begin {
         #get all network adapters
         $colNic = Get-NetAdapter
-        #error variable
-        $err = ""
+        #error variable to determine success of action
+        $success = $true
     }
     
     process {
@@ -30,6 +30,7 @@ function Set-NICPowerSaving {
                 }
                 catch {
                     Write-Host -ForegroundColor Red "Error Trying to Enable Power Management on:" $nic.Name
+                    $success = $false;
                 }
             }
             else {
@@ -38,9 +39,12 @@ function Set-NICPowerSaving {
                 }
                 catch {
                     Write-Host -ForegroundColor Red "Error Trying to Disable Power Management on:" $nic.Name
+                    $success = $false;
                 }
             }
         }
+        
+        return $success
     }
 }
 
