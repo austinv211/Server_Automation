@@ -48,6 +48,26 @@ function Set-NICPowerSaving {
     }
 }
 
+#function to set the binding order, binding order must set prod netadapters first
+function Set-NICBindingOrder {
+    [CmdletBinding()]
+
+    param(
+        [Parameter(Mandatory=$true)]
+        [switch]$ascending,
+        [Parameter(Mandatory=$true)]
+        [switch]$descending
+    )
+    
+    begin {
+        #get current binding order
+        Get-NetAdapterBinding
+    }
+    process {
+
+    }
+}
+
 
 
 
